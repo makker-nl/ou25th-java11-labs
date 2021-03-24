@@ -1,0 +1,267 @@
+[redhat@rhfuse practice3]$ jshell
+|  Welcome to JShell -- Version 11.0.10
+|  For an introduction type: /help intro
+
+
+jshell> String teaTxt = "Tea";
+teaTxt ==> "Tea"
+
+jshell> String b = "Tea";
+b ==> "Tea"
+
+jshell> teaTxt == b;
+$6 ==> true
+
+jshell> String c = new String ("Tea");
+c ==> "Tea"
+
+jshell> teaTxt == c;
+$8 ==> false
+
+jshell> teaTxt == b;
+$9 ==> true
+
+jshell> b == c;
+$10 ==> false
+
+jshell> c.intern();
+$11 ==> "Tea"
+
+jshell> teaTxt == b;
+$12 ==> true
+
+jshell> String d = c.intern();
+d ==> "Tea"
+
+jshell> teaTxt == d;
+$14 ==> true
+
+jshell> c = teaTxt + ' '+ b;
+c ==> "Tea Tea"
+
+jshell> c.indexOf('T',1);
+$16 ==> 4
+
+jshell> c.charAt(c.length()-1);
+$17 ==> 'a'
+
+
+jshell> c = c.toUpperCase();
+c ==> "TEA TEA"
+
+jshell> c.substring(c.lastIndexOf('T'), c.lastIndexOf('T')+2);[H
+$19 ==> "TE"
+
+jshell> StringBuilder txt = new StringBuilder(c);
+txt ==> TEA TEA
+
+jshell> txt.length();
+$21 ==> 7
+
+jshell> txt.capacity();
+$22 ==> 23
+
+jshell> txt.replace(0,3,"What is the price of")
+$23 ==> What is the price of TEA
+
+jshell> txt.length();
+$24 ==> 24
+
+jshell> txt.capacity();
+$25 ==> 48
+
+jshell> double price = 1.85;
+price ==> 1.85
+
+jshell> double rate = 0.065;
+rate ==> 0.065
+
+jshell> price -= price*rate;
+$28 ==> 1.7297500000000001
+
+jshell> price = Math.round(price*100)/100.0;
+price ==> 1.73
+
+jshell> import java.math.BigDecimal;
+
+jshell> import java.math.RoundingMode;
+
+jshell> BigDecimal rate = BigDecimal.valueOf(0.065);
+rate ==> 0.065
+
+jshell> BigDecimal price = BigDecimal.valueOf(1.85);
+price ==> 1.85
+
+jshell> price = price.subtract(price.multiply(rate)).setScale(2,RoundingMode.HALF_UP);
+price ==> 1.73
+
+jshell> Locale locale = Locale.FRANCE;
+locale ==> fr_FR
+
+
+jshell> import java.text.NumberFormat;
+
+jshell> NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+currencyFormat ==> java.text.DecimalFormat@674dc
+
+jshell> NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
+percentFormat ==> java.text.DecimalFormat@674dc
+
+jshell> percentFormat.setMaximumFractionDigits(2);
+
+jshell> price
+price ==> 1.73
+
+jshell> rate
+rate ==> 0.065
+
+jshell> currencyFormat.format(price);
+$42 ==> "1,73 €"
+
+jshell> percentFormat.format(rate);
+$43 ==> "6,5 %"
+
+
+jshell> locale = Locale.UK
+locale ==> en_GB
+
+jshell> String priceTxt = currencyFormat.format(price);
+priceTxt ==> "1,73 €"
+
+jshell> String rateTxt = percentFormat.format(rate);
+rateTxt ==> "6,5 %"
+
+jshell> import java.time.*
+
+jshell> LocalDate today = LocalDate.now();
+today ==> 2021-03-05
+
+jshell> today.plusYears(1).getDayOfWeek();
+$49 ==> SATURDAY
+
+jshell> LocalTime teaTime = LocalTime.of(17,30);
+teaTime ==> 17:30
+
+jshell> LocalDate birthDate = LocalDate.of(2021,04,28);
+birthDate ==> 2021-04-28
+
+jshell> birthDate.getDayOfWeek();
+$52 ==> WEDNESDAY
+
+
+jshell> Duration timeGap = Duration.between(LocalTime.now(),teaTime);
+timeGap ==> PT-1H-57M-58.956215S
+
+jshell> timeGap.toMinutes();
+$54 ==> -117
+
+jshell> timeGap.toHours();
+$55 ==> -1
+
+jshell> timeGap.toMinutesPart();
+$56 ==> -57
+
+jshell> LocalDateTime tomorrowTeaTime = LocalDateTime.of(today.plusDays(1),teaTime);
+tomorrowTeaTime ==> 2021-03-06T17:30
+
+jshell> ZoneId london = ZoneId.of("Europe/London");
+london ==> Europe/London
+
+jshell> ZoneId katmandu = ZoneId.of("Asia/Katmandu");
+katmandu ==> Asia/Katmandu
+
+jshell> ZonedDateTime londonTime = ZonedDateTime.of(tomorrowTeaTime, london);
+londonTime ==> 2021-03-06T17:30Z[Europe/London]
+
+jshell> ZonedDateTime katmanduTime = ZonedDateTime.of(tomorrowTeaTime, katmandu);
+katmanduTime ==> 2021-03-06T17:30+05:45[Asia/Katmandu]
+
+jshell> katmanduTime.getOffset();
+$62 ==> +05:45
+
+jshell> londonTime.getOffset();
+$63 ==> Z
+
+jshell> locale
+locale ==> en_GB
+
+
+jshell> import java.time.format.DateTimeFormatter;
+
+jshell> DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(datePattern, locale);
+dateFormat ==> Text(DayOfWeek,SHORT)', 'Value(DayOfMonth)' of 'T ... fHour,2)' 'ZoneText(SHORT)
+
+jshell> String timeTxt = dateFormat.format(katmanduTime);
+timeTxt ==> "Sat, 6 of March 2021at 17:30 NPT"
+
+jshell> katmanduTime;
+katmanduTime ==> 2021-03-06T17:30+05:45[Asia/Katmandu]
+
+jshell> String datePattern = "EE', 'd' of 'MMMM yyyy' at 'HH:mm z";
+datePattern ==> "EE', 'd' of 'MMMM yyyy' at 'HH:mm z"
+
+jshell> String timeTxt = dateFormat.format(katmanduTime);
+timeTxt ==> "Sat, 6 of March 2021at 17:30 NPT"
+
+jshell> DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(datePattern, locale);
+dateFormat ==> Text(DayOfWeek,SHORT)', 'Value(DayOfMonth)' of 'T ... fHour,2)' 'ZoneText(SHORT)
+
+jshell> String timeTxt = dateFormat.format(katmanduTime);
+timeTxt ==> "Sat, 6 of March 2021 at 17:30 NPT"
+
+
+jshell> import java.util.ResourceBundle;
+
+jshell> import java.text.MessageFormat;
+ 
+jshell> Locale locale = Locale.UK
+locale ==> en_GB
+
+
+jshell> ResourceBundle msg = ResourceBundle.getBundle("messages", locale);
+msg ==> java.util.PropertyResourceBundle@4b9af9a9
+
+jshell> String offerPattern = msg.getString("offer");
+offerPattern ==> "{0}, price: {1} (applied {2} discount), valid until {3}"
+
+jshell> MessageFormat.format(offerPattern, teaTxt, priceTxt, rateTxt, timeTxt);
+$36 ==> "Tea, price: £1.73 (applied 6% discount), valid until Sat, 6 of March 2021 at 17:30 NPT"
+
+jshell> locale = new Locale("ru", "RU");
+locale ==> ru_RU
+
+jshell> ResourceBundle msg = ResourceBundle.getBundle("messages", locale);
+msg ==> java.util.PropertyResourceBundle@5d22bbb7
+
+jshell> String offerPattern = msg.getString("offer");
+offerPattern ==> "{0}, цена: {1} (применять {2} скидка), действительна до {3}"
+
+jshell> datePattern = msg.getString("dateFormat");
+datePattern ==> "EE', 'd MMMM yyyy' в 'HH:mm z"
+
+jshell> currencyFormat = NumberFormat.getCurrencyInstance(locale);
+currencyFormat ==> java.text.DecimalFormat@674dc
+
+jshell> percentFormat = NumberFormat.getPercentInstance(locale);
+percentFormat ==> java.text.DecimalFormat@674dc
+
+jshell> DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(datePattern, locale);
+dateFormat ==> Text(DayOfWeek,SHORT)', 'Value(DayOfMonth)' 'Text ... fHour,2)' 'ZoneText(SHORT)
+
+jshell> dateFormat = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM).localizedBy(locale);
+dateFormat ==> Localized(MEDIUM,MEDIUM)
+
+jshell> teaTxt = "Чай";
+teaTxt ==> "Чай"
+
+jshell> String priceTxt = currencyFormat.format(price);
+priceTxt ==> "1,73 ₽"
+
+jshell> String rateTxt = percentFormat.format(rate);
+rateTxt ==> "6,5 %"
+
+jshell> String timeTxt = dateFormat.format(katmanduTime);
+timeTxt ==> "6 мар. 2021 г., 17:30:00"
+
+jshell> MessageFormat.format(offerPattern, teaTxt, priceTxt, rateTxt, timeTxt);
+$56 ==> "Чай, цена: 1,73 ₽ (применять 6,5 % скидка), действительна до 6 мар. 2021 г., 17:30:00"
