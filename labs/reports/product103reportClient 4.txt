@@ -1,4 +1,5 @@
-Cake, Price: £3.99, Rating ☆☆☆☆☆, Best Before: 21/09/2019
+Cake, Price: £3.99, Rating ★★★★★, Best Before: 21/09/2019
 Review: ★★★★★	Very nice cake
 Review: ★★★★★	This cake is perfect!
 Review: ★★★★☆	It's good, but I've expected more chocolate
+Review: ★★★★☆	Yet another review from Client 4

@@ -1,0 +1,4 @@
+Cookie, Price: ¤ 2.99, Rating ★★★☆☆, Best Before: 2019-09-19
+Review: ★★★★☆	Yet another review from Client 2
+Review: ★★★☆☆	Just another cookie
+Review: ★★★☆☆	Ok

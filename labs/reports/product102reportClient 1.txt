@@ -1,0 +1,5 @@
+Coffee, Price: $1.99, Rating ★★★☆☆, Best Before: 3/24/21
+Review: ★★★★★	It's perfect with ten spoons of sugar!
+Review: ★★★★☆	Yet another review from Client 1
+Review: ★★★☆☆	Coffee was ok
+Review: ★☆☆☆☆	Where is the milk?!
