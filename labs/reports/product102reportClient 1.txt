@@ -1,5 +1,6 @@
-Coffee, Price: $1.99, Rating ★★★☆☆, Best Before: 3/24/21
-Review: ★★★★★	It's perfect with ten spoons of sugar!
-Review: ★★★★☆	Yet another review from Client 1
-Review: ★★★☆☆	Coffee was ok
-Review: ★☆☆☆☆	Where is the milk?!
+Coffee, Prijs: € 1.99, Beoordeling ★★★☆☆, Tenminste houdbaar tot: 2021-04-07
+Beoordeling: ★★★★★	It's perfect with ten spoons of sugar!
+Beoordeling: ★★★★☆	Yet another review from Client 1
+Beoordeling: ★★★☆☆	Coffee was ok
+Beoordeling: ★☆☆☆☆	Where is the milk?!
+Where is the milk?!
