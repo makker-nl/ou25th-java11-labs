@@ -16,29 +16,28 @@
  */
 package labs.pm.data;
 
-import java.math.BigDecimal;
-import java.time.LocalTime;
-
 /**
  *
  * @author redhat
  */
-public final class Drink extends Product {
+public enum Rating {
+    //Black Star: \u2605
+    //White Starte \u2606
 
-    public Drink(int id, String name, BigDecimal price, Rating rating) {
-        super(id, name, price, rating);
+    NOT_RATED("\u2606\u2606\u2606\u2606\u2606"),
+    ONE_STAR("\u2605\u2606\u2606\u2606\u2606"),
+    TWO_STAR("\u2605\u2605\u2606\u2606\u2606"),
+    THREE_STAR("\u2605\u2605\u2605\u2606\u2606"),
+    FOUR_STAR("\u2605\u2605\u2605\u2605\u2606"),
+    FIVE_STAR("\u2605\u2605\u2605\u2605\u2605");
+
+    private String stars;
+
+    private Rating(String stars) {
+        this.stars = stars;
     }
 
-    @Override
-    public BigDecimal getDiscount() {
-        LocalTime now = LocalTime.now();
-        return (now.isAfter(LocalTime.of(17, 30)) && now.isBefore(LocalTime.of(18, 30))) ? super.getDiscount() : BigDecimal.ZERO;
+    public String getStars() {
+        return stars;
     }
-
-    @Override
-    public Product applyRating(Rating newRating) {
-        return new Drink(getId(), getName(), getPrice(), newRating);
-
-    }
-
 }

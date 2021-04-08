@@ -14,31 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package labs.pm.data;
-
-import java.math.BigDecimal;
-import java.time.LocalTime;
+package labs.pm.service;
 
 /**
  *
  * @author redhat
  */
-public final class Drink extends Product {
+public class ProductManagerException extends Exception {
 
-    public Drink(int id, String name, BigDecimal price, Rating rating) {
-        super(id, name, price, rating);
+    public ProductManagerException() {
+        super();
     }
-
-    @Override
-    public BigDecimal getDiscount() {
-        LocalTime now = LocalTime.now();
-        return (now.isAfter(LocalTime.of(17, 30)) && now.isBefore(LocalTime.of(18, 30))) ? super.getDiscount() : BigDecimal.ZERO;
+    
+    public ProductManagerException(String message) {
+        super(message);
     }
-
-    @Override
-    public Product applyRating(Rating newRating) {
-        return new Drink(getId(), getName(), getPrice(), newRating);
-
+    
+    
+    public ProductManagerException(String message, Throwable cause) {
+        super(message, cause);
     }
-
 }

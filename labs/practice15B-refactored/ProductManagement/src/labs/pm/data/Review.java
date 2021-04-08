@@ -16,29 +16,38 @@
  */
 package labs.pm.data;
 
-import java.math.BigDecimal;
-import java.time.LocalTime;
+import java.io.Serializable;
 
 /**
  *
  * @author redhat
  */
-public final class Drink extends Product {
+public class Review implements Comparable<Review>, Serializable {
 
-    public Drink(int id, String name, BigDecimal price, Rating rating) {
-        super(id, name, price, rating);
+    private Rating rating;
+    private String comments;
+
+    public Review(Rating rating, String comments) {
+        this.rating = rating;
+        this.comments = comments;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public String getComments() {
+        return comments;
     }
 
     @Override
-    public BigDecimal getDiscount() {
-        LocalTime now = LocalTime.now();
-        return (now.isAfter(LocalTime.of(17, 30)) && now.isBefore(LocalTime.of(18, 30))) ? super.getDiscount() : BigDecimal.ZERO;
+    public String toString() {
+        return "Review{" + "rating=" + rating + ", comments=" + comments + '}';
     }
 
     @Override
-    public Product applyRating(Rating newRating) {
-        return new Drink(getId(), getName(), getPrice(), newRating);
-
+    public int compareTo(Review other) {
+        return other.rating.ordinal() - this.rating.ordinal();
     }
 
 }
